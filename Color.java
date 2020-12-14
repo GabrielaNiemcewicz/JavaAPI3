@@ -3,9 +3,10 @@ public class Color implements ColorAPI {
 	int [] colorcodes = new int[3];
 	String model;
 	static Enum Models;
+	//encapsulation later
 	
 
-	public Color() {
+	public Color(int first, int second, int third) {
 		
 	}
 	
