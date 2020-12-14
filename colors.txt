@@ -1,3 +1,26 @@
-rgb numbers
-rgb letters
-other?
+Constructors:
+rgb default
+rgb numbers 
+(rgb letters... very extra feature)
+ryb color model
+cmy color model
+
+
+
+To create a Colour object you must specify exactly three colour components 
+//constructor three arguments, diff models diff constructors
+•It is not allowed to create a Colour object without specifying valid component values 
+//arguments not null
+•Valid component values are in the range 0 to 255 
+// less than, more than
+•The default colour model is RGB
+//no string specified, use RGB constructor  
+•A different colour models is specified by using a String value to identify the name of the model when creating the Colour object 
+//fourth value in constructor, string
+•Colours can be compared, to be equal they must have the same colour model and same component values 
+//override isEqual, specs above clear- getters ==
+•Colours can be added, if they use the same model, by adding each of the components, however the value of each component cannot exceed 255
+//if same model (exc), try to add, throw exception too high number at >255- three times, so maybe that second exception from separate inner method
+
+
+//**** create the interface for failing tests
