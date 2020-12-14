@@ -23,6 +23,8 @@ public class Color implements ColorAPI {
 
 	public void add(Color color) {};
 	
+	private boolean isSameModel(Color color) {return false;};
+	
 	@Override
 	public boolean isEqual(Color color) {
 		// TODO Auto-generated method stub
