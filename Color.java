@@ -2,13 +2,19 @@
 public class Color implements ColorAPI {
 	int [] colorcodes = new int[3];
 	String model;
-	static Enum Models;
-	//encapsulation later
+	public static final Enum models = null;
 	
 
 	public Color(int first, int second, int third) {
 		
 	}
+	
+	
+	public Color(int first, int second, int third, String model) {
+		
+	}
+	
+	
 	
 	public int getColor1() { return 1;}; 
 	public int getColor2() { return 2;};
