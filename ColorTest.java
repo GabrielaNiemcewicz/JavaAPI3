@@ -59,6 +59,8 @@ public class ColorTest {
 		assertNotEquals("",hardcodedColor.getColor1());		
 		return false;
 	}
+	
+	//try catch
 	public boolean isWrongNumberOfArgs(Color color) {
 		Color hardcodedColor = new Color(1,2,3);
 		assertEquals(1,hardcodedColor.getColor1());		

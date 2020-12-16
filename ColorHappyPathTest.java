@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -69,13 +70,25 @@ public class ColorHappyPathTest {
 	}
 	
 	public boolean isIsEqualWhenTrue(Color color) {
-		Color hardcodedColor = new Color(1,2,3);
-		assertEquals(1,hardcodedColor.getColor1());		
+		Color copyColor = new Color(color.getColor1(),color.getColor2(),color.getColor3(),color.getModel());
+		assertTrue(color.isEqual(copyColor));		
 		return false;
 	}
 	public boolean isIsEqualWhenFalse(Color color) {
-		Color hardcodedColor = new Color(1,2,3);
-		assertEquals(1,hardcodedColor.getColor1());		
+		Color copyColor = new Color(color.getColor1()+1,color.getColor2()+1,color.getColor3()+1,color.getModel());
+		assertFalse(color.isEqual(copyColor));		
+		copyColor = new Color(color.getColor1()-5,color.getColor2(),color.getColor3(),color.getModel());
+		assertFalse(color.isEqual(copyColor));		
+		copyColor = new Color(color.getColor1(),color.getColor2()-100,color.getColor3(),color.getModel());
+		assertFalse(color.isEqual(copyColor));		
+		copyColor = new Color(color.getColor1(),color.getColor2(),color.getColor3()+3,color.getModel());
+		assertFalse(color.isEqual(copyColor));		
+		copyColor = new Color(color.getColor1(),color.getColor2(),color.getColor3(),"RYB");
+		assertFalse(color.isEqual(copyColor));	
+		copyColor = new Color(color.getColor1(),color.getColor2(),color.getColor3(),"CMY");
+		assertFalse(color.isEqual(copyColor));	
+		copyColor = new Color(color.getColor1(),color.getColor2(),color.getColor3(),"RGB");
+		assertFalse(color.isEqual(copyColor));		
 		return false;
 	}
 	//can be random, recorded tests
@@ -102,6 +115,14 @@ public class ColorHappyPathTest {
 		assertEquals(1,hardcodedColor.getColor1());		
 		return false;
 	}
+	
+	public boolean isCorrectModelSet(Color color) {
+		Color hardcodedColor = new Color(1,2,3);
+		assertEquals(1,hardcodedColor.getColor1());		
+		return false;
+	}
+	
+	
 	
 	
 	
