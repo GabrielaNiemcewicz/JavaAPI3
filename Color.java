@@ -2,7 +2,8 @@
 public class Color implements ColorAPI {
 	int [] colorcodes = new int[3];
 	String model;
-	public static final Enum models = null;
+	public static final Enum models = null; //enum or hashmap?
+	Hashmap<String, int[]> models2 = null; //is in test on initialization try catch
 	
 
 	public Color(int first, int second, int third) {
@@ -26,6 +27,8 @@ public class Color implements ColorAPI {
 	public void addAll(Color[] colors) {};
 	
 	private boolean isSameModel(Color color) {return false;};
+	
+	private boolean isModelValid(String userInputConstr) {return false;}//isIn method wrapped
 	
 	@Override
 	public boolean isEqual(Color color) {
