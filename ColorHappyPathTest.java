@@ -93,20 +93,31 @@ public class ColorHappyPathTest {
 	}
 	//can be random, recorded tests
 	public boolean addTwoSafeTest(Color color) {
-		Color hardcodedColor = new Color(1,2,3);
-		assertEquals(1,hardcodedColor.getColor1());		
+		//new Color(int((modelMAX-color.get)/2))
+		Color hardcodedColor = new Color(13,21,31, color.getModel()); //can be rands
+		color.add(hardcodedColor);
+		Color solutionColor = new Color (hardcodedColor.getColor1()+color.getColor1(),hardcodedColor.getColor2()+color.getColor2(),hardcodedColor.getColor3()+color.getColor3(), color.getModel());
+		assertTrue(color.isEqual(solutionColor));		
 		return false;
 	}
 	
 	public boolean addThreeSafeTest(Color color) {
-		Color hardcodedColor = new Color(1,2,3);
-		assertEquals(1,hardcodedColor.getColor1());		
+		Color [] colors = new Color[] {new Color(1,2,3), new Color(3,2,1)};
+		color.addAll(colors);
+		assertEquals(1+3+color.getColor1(),color.getColor1());	
+		assertEquals(2+2+color.getColor1(),color.getColor1());		
+		assertEquals(3+1+color.getColor1(),color.getColor1());	
 		return false;
 	}
 	
 	public boolean addThreeBorderSafeTests(Color color) {
-		Color hardcodedColor = new Color(1,2,3);
-		assertEquals(1,hardcodedColor.getColor1());		
+		//needs model max 
+		//C1(floor(max/3),), C2(floor(max-color-c1)
+		Color [] colors = new Color[] {new Color(1,2,3), new Color(3,2,1)};
+		color.addAll(colors);
+		assertEquals(1+3+color.getColor1(),color.getColor1());	
+		assertEquals(2+2+color.getColor1(),color.getColor1());		
+		assertEquals(3+1+color.getColor1(),color.getColor1());		
 		return false;
 	}
 	
