@@ -1,45 +1,53 @@
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Color implements ColorAPI {
 	int [] colorcodes = new int[3];
 	String model;
-	public static final Enum models = null; //enum or hashmap?
-	//Hashmap<String, int> models2 = null; //is in test on initialization try catch
-	//rgb: <0-255>
-	//ryb: lets say <0-100>
-	//
+	//public static final Enum models = null; //enum or hashmap?
+	static ArrayList<String> MODELS = new ArrayList <String> ();
 
-	public Color(int first, int second, int third) {
+	static final int []MAX_LENGTH = new int[] {255,100,360};
+
+	public Color(int first, int second, int third) throws IllegalArgumentException {
+		MODELS.add("RGB"); MODELS.add("RYB"); MODELS.add("CMY");
 		colorcodes[0]= first;
 		colorcodes[1]= second;
 		colorcodes[2]= third;
+		for(int color:colorcodes)
+			if(color>255||color<0) throw new IllegalArgumentException();
 		model = "RGB";
 	}
 	
 	
-	public Color(int first, int second, int third, String model) {
+	public Color(int first, int second, int third, String model) throws IllegalArgumentException {
+		MODELS.add("RGB"); MODELS.add("RYB"); MODELS.add("CMY");
 		colorcodes[0]= first;
 		colorcodes[1]= second;
 		colorcodes[2]= third;
 		if(isModelValid(model))
-		this.model = model; //else exception
+		this.model = model; 
+		else throw new IllegalArgumentException();
 	}
 	
 	
 	
-	public int getColor1() { return colorcodes[0];}; 
-	public int getColor2() { return colorcodes[1];};
-	public int getColor3() { return colorcodes[2];};
-	public String getModel() {return model;};
+	public int getColor1() throws NullPointerException { return colorcodes[0];}; 
+	public int getColor2() throws NullPointerException { return colorcodes[1];};
+	public int getColor3() throws NullPointerException { return colorcodes[2];};
+	public String getModel() throws NullPointerException {return model;};
 
 	public void add(Color color) {
 		if(this.isSameModel(color))
 	{
 		colorcodes[0]+=color.getColor1();
-		System.out.println("ad");
 		colorcodes[1]+=color.getColor2();
 		System.out.println("add");
 		colorcodes[2]+= color.getColor3();
 		System.out.println("addd");
+		for(int c:colorcodes)
+		{if (c>255||c<0)}///////////////////////
+		throw new IllegalArgumentException(); 
 	} else System.out.println("diff model");
 	};
 	
@@ -48,7 +56,7 @@ public class Color implements ColorAPI {
 	
 	private boolean isSameModel(Color color) {return this.getModel().equals(color.getModel());}
 	
-	private boolean isModelValid(String userInputConstr) {return true;}//isIn method wrapped
+	private boolean isModelValid(String userInputConstr) {return MODELS.contains(userInputConstr);}//isIn method wrapped
 	
 	//@Override
 	public boolean isEqual(Color color) {

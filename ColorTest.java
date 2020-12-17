@@ -2,6 +2,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 //check - equals, not equals, edge cases, [...]
 //split sad and happy path tests
@@ -39,7 +40,11 @@ public class ColorTest {
 		return false;
 	}
 
-
+	public boolean constructorIllegalArg() {
+		Color hardcodedColor = new Color(1,2,3);
+		assertThrows(Exception.class,()->hardcodedColor.add(hardcodedColor));
+		return false;
+	}
 
 	
 	public boolean isColorNotAboveTreshold(Color color) {
@@ -91,6 +96,8 @@ public class ColorTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		assertEquals(1,2);
+		ColorTest c = new ColorTest();
+		c.constructorIllegalArg();
 	}
 
 }
