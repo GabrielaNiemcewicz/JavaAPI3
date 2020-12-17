@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.Test;
+
 //check - equals, not equals, edge cases, [...]
 //split sad and happy path tests
 public class ColorTest {
@@ -93,11 +95,20 @@ public class ColorTest {
 		return false;
 	}
 
+@Test 
+public void name() {
+	Exception exception =
+			assertThrows(IllegalArgumentException.class,()-> {Color col = new Color(-5,-5,-5)});
+	
+	
+}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		assertEquals(1,2);
 		ColorTest c = new ColorTest();
 		c.constructorIllegalArg();
+		
+		
 	}
 
 }

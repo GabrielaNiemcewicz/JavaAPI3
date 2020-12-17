@@ -37,7 +37,7 @@ public class Color implements ColorAPI {
 	public int getColor3() throws NullPointerException { return colorcodes[2];};
 	public String getModel() throws NullPointerException {return model;};
 
-	public void add(Color color) {
+	public void add(Color color) throws IllegalArgumentException {
 		if(this.isSameModel(color))
 	{
 		colorcodes[0]+=color.getColor1();
@@ -46,20 +46,20 @@ public class Color implements ColorAPI {
 		colorcodes[2]+= color.getColor3();
 		System.out.println("addd");
 		for(int c:colorcodes)
-		{if (c>255||c<0)}///////////////////////
+		{if (c>255||c<0)///////////////////////
 		throw new IllegalArgumentException(); 
-	} else System.out.println("diff model");
-	};
+	 else throw new IllegalArgumentException(); 
+		}}};
 	
-	public void addAll(Color[] colors) 
+	public void addAll(Color[] colors)  throws IllegalArgumentException
 	{		for(Color color:colors)  this.add(color);	};
 	
-	private boolean isSameModel(Color color) {return this.getModel().equals(color.getModel());}
+	private boolean isSameModel(Color color) throws NullPointerException{return this.getModel().equals(color.getModel());}
 	
-	private boolean isModelValid(String userInputConstr) {return MODELS.contains(userInputConstr);}//isIn method wrapped
+	private boolean isModelValid(String userInputConstr) throws IllegalArgumentException, NullPointerException {return MODELS.contains(userInputConstr);}//isIn method wrapped
 	
-	//@Override
-	public boolean isEqual(Color color) {
+	@Override
+	public boolean isEqual(Color color) throws NullPointerException{
 		if(getModel()!=color.getModel())
 			return false;
 		if(colorcodes[0]!=color.getColor1()||colorcodes[1]!=color.getColor2()||colorcodes[2]!=color.getColor3())

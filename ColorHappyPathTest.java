@@ -112,14 +112,14 @@ public class ColorHappyPathTest {
 		//new Color(int((modelMAX-color.get)/2))
 		Color color = new Color (13,14,0, "CMY");
 		System.out.println("color init");
-		Color hardcodedColor = new Color(13,21,0, color.getModel()); //rands
+		Color hardcodedColor = new Color(13,21,1,"CMY"); //rands
 		System.out.println("hardcolor init");
 		color.add(hardcodedColor);
 		int t1 = hardcodedColor.getColor1()+color.getColor1();
 		int t2= hardcodedColor.getColor2()+color.getColor2();
 		int t3= hardcodedColor.getColor3()+color.getColor3();
 		System.out.println("three ints");
-		Color solutionColor = new Color (t1,t2,t3, color.getModel());
+		Color solutionColor = new Color (t1,t2,t3, "CMY");
 		System.out.println("solution color");
 		color.isEqual(solutionColor);
 		assertTrue(color.isEqual(solutionColor));		
@@ -188,7 +188,7 @@ c.isInputPositive();
 c.isInputCorrectNumber();
 c.isIsEqualWhenTrue();
 c.isIsEqualWhenFalse();
-//c.addTwoSafeTest();
+c.addTwoSafeTest();
 //c.addThreeSafeTest(); //failing
 //c.addThreeBorderSafeTests(); //failing
 c.isCorrectModelSet();
