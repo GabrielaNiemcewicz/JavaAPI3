@@ -19,27 +19,23 @@ public class ColorTest {
 	//tests to assert type
 	
 
-	public boolean isModelValid(Color color) { 
+	public void isModelValid(Color color) { 
 		//includes default model choice
-		Color RYBColor = new Color(1,2,3, "RYB");
-		Color RGBColor = new Color(2,5,3,"RGB");
-		String modelCorrect = "RGB";
-		String modelIncorrect = "supermodel";
-		String emptyModel = "";
-		String spaceModel = "RGB ";
+
+		
+		
 		
 		 //Color.models(); //check if in model- might require different assertion
 		//////////////////*
 //get model Enums and check if it's in		
 //////////////////////////////		
 		
-		return false;
+	
 	}
 
 	
 	public boolean isInputNegative(Color color) {
-		Color hardcodedColor = new Color(1,2,3);
-		assertFalse(hardcodedColor.getColor3()<0);		
+	
 		return false;
 	}
 
@@ -115,7 +111,50 @@ public void name() {
 		System.out.println(exception.getLocalizedMessage());
 		System.out.println(exception.getClass()); //not null
 		System.out.println(exception.hashCode()); //not null
+		
+		Throwable error = Assertions.assertThrows(IllegalArgumentException.class,()->{ Color RGBColor = new Color(2,5,3,"supermodel");});
+		System.out.println(error.getClass()); //not null
+		System.out.println(error.hashCode()); //not null
 
+		
+		error = Assertions.assertThrows(IllegalArgumentException.class,()->{ Color RGBColor = new Color(2,5,3,"supermodel");});
+		System.out.println(error.getClass()); 
+		
+		
+		error = Assertions.assertThrows(IllegalArgumentException.class,()->{ Color RGBColor = new Color(2,5,3,"");});
+		System.out.println(error.getClass()); 
+		
+		
+		error = Assertions.assertThrows(IllegalArgumentException.class,()->{ Color RGBColor = new Color(2,5,3,"RGB ");});
+		System.out.println(error.getClass()); 
+		
+		error = Assertions.assertThrows(IllegalArgumentException.class,()->{ Color RGBColor = new Color(2,5,3,"cmy");});
+		System.out.println(error.getClass());
+		
+		
+		//error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(-2,-5,-3,"RGB");});
+		//System.out.println(error.getClass());
+		
+
+
+		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(256,500,1000);});
+		System.out.println(error.getClass());
+		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(-1,200,100);});
+		System.out.println(error.getClass());
+		
+		///////////////
+		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(2,5,3,"RGB ");});
+		System.out.println(error.getClass());
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 }

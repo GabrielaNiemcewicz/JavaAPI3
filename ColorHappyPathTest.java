@@ -79,6 +79,11 @@ public class ColorHappyPathTest {
 		assertEquals((int)rand/3,hardcodedColor.getColor2());	
 		hardcodedColor = new Color(1,2,rand);
 		assertEquals(rand,hardcodedColor.getColor3());	
+		assertFalse(hardcodedColor.getColor3()<0);	
+		Color borderColorRGB = new Color (255,255,255);
+		Color borderColorCMY = new Color (360,360,360);
+		Color borderColorRYB = new Color (100,100,100);
+		
 		
 		return false;
 	}

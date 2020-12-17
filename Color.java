@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Color implements ColorAPI {
@@ -6,28 +7,32 @@ public class Color implements ColorAPI {
 	String model;
 	//public static final Enum models = null; //enum or hashmap?
 	static ArrayList<String> MODELS = new ArrayList <String> ();
+	static HashMap<String,Integer> models = new HashMap<String,Integer>();
 
 	static final int []MAX_LENGTH = new int[] {255,100,360};
 
 	public Color(int first, int second, int third) throws IllegalArgumentException {
 		MODELS.add("RGB"); MODELS.add("RYB"); MODELS.add("CMY");
+		model = "RGB";
 		colorcodes[0]= first;
 		colorcodes[1]= second;
 		colorcodes[2]= third;
-		for(int color:colorcodes)
-			if(color>255||color<0) throw new IllegalArgumentException();
-		model = "RGB";
+		for(int i=0;i<3;i++)
+			if(colorcodes[i]>=this.getMax()||colorcodes[i]<=0) throw new IllegalArgumentException();
+
 	}
 	
 	
 	public Color(int first, int second, int third, String model) throws IllegalArgumentException {
 		MODELS.add("RGB"); MODELS.add("RYB"); MODELS.add("CMY");
+		if(isModelValid(model))		this.model = model; 
+		else throw 			new IllegalArgumentException();
 		colorcodes[0]= first;
 		colorcodes[1]= second;
 		colorcodes[2]= third;
-		if(isModelValid(model))
-		this.model = model; 
-		else throw new IllegalArgumentException();
+		for(int i=0;i<3;i++)
+			if(colorcodes[i]>this.getMax()||colorcodes[i]<0) throw new IllegalArgumentException();
+
 	}
 	
 	
@@ -57,6 +62,17 @@ public class Color implements ColorAPI {
 	private boolean isSameModel(Color color) throws NullPointerException{return this.getModel().equals(color.getModel());}
 	
 	private boolean isModelValid(String userInputConstr) throws IllegalArgumentException, NullPointerException {return MODELS.contains(userInputConstr);}//isIn method wrapped
+	
+	private int getMax()  {
+		if(getModel().equals("RGB"))
+			return 255;
+		if(getModel().equals("RYB"))
+			return 100;
+		else
+			return 360;
+	
+		
+	}
 	
 	@Override
 	public boolean isEqual(Color color) throws NullPointerException{
