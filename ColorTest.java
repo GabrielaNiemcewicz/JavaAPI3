@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 //check - equals, not equals, edge cases, [...]
 //split sad and happy path tests
@@ -89,26 +90,32 @@ public class ColorTest {
 	
 
 	
-	public boolean isWrongModelSet(Color color) {
+	public void isWrongModelSet(Color color) {
 		Color hardcodedColor = new Color(1,2,3);
-		assertEquals(1,hardcodedColor.getColor1());		
-		return false;
+		assertEquals(2,hardcodedColor.getColor1());		
+	
 	}
-
+/*
 @Test 
 public void name() {
 	Exception exception =
 			assertThrows(IllegalArgumentException.class,()-> {Color col = new Color(-5,-5,-5)});
 	
 	
-}
+}*/
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		assertEquals(1,2);
+		assertEquals(2,2);
+		Color col = new Color (2,2,1);
 		ColorTest c = new ColorTest();
-		c.constructorIllegalArg();
-		
-		
+		c.constructorIllegalArg(); //throwable
+		IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class,()->{col.add(col);});
+		System.out.println(exception.getMessage());
+		System.out.println(exception.getCause());
+		System.out.println(exception.getLocalizedMessage());
+		System.out.println(exception.getClass()); //not null
+		System.out.println(exception.hashCode()); //not null
+
 	}
 
 }
