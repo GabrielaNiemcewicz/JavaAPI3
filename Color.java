@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 public class Color implements ColorAPI {
 	int [] colorcodes = new int[3];
+	int nothing;
 	String model;
 	static ArrayList<String> MODELS = new ArrayList <String> ();
 //	static final int []MAX_LENGTH = new int[] {255,100,360};
@@ -11,6 +12,7 @@ public class Color implements ColorAPI {
 	public Color(int first, int second, int third) throws IllegalArgumentException, IndexOutOfBoundsException {
 		MODELS.add("RGB"); MODELS.add("RYB"); MODELS.add("CMY");
 		model = "RGB";
+		
 		colorcodes[0]= first;
 		colorcodes[1]= second;
 		colorcodes[2]= third;
@@ -20,10 +22,12 @@ public class Color implements ColorAPI {
 	}
 	
 	
-	public Color(int first, int second, int third, String model) throws IllegalArgumentException,IndexOutOfBoundsException  {
+	public Color(int first, int second, int third, String model) throws IllegalArgumentException,IndexOutOfBoundsException, NullPointerException  {
 		MODELS.add("RGB"); MODELS.add("RYB"); MODELS.add("CMY");
+		if(model.isBlank()) throw new NullPointerException();
 		if(isModelValid(model))		this.model = model; 
 		else throw 			new IllegalArgumentException();
+		
 		colorcodes[0]= first;
 		colorcodes[1]= second;
 		colorcodes[2]= third;
@@ -56,10 +60,13 @@ public class Color implements ColorAPI {
 	public void addAll(Color[] colors)  throws IllegalArgumentException
 	{		for(Color color:colors)  this.add(color);	};
 	
-	private boolean isSameModel(Color color) throws NullPointerException{return this.getModel().equals(color.getModel());}
+	private boolean isSameModel(Color color) throws NullPointerException
+	{
+		
+		return this.getModel().equals(color.getModel());}
 	
-	private boolean isModelValid(String userInputConstr) throws IllegalArgumentException, NullPointerException 
-		{return MODELS.contains(userInputConstr);}//isIn method wrapped
+	private boolean isModelValid(String userInputConstr) throws IllegalArgumentException 
+		{		return MODELS.contains(userInputConstr);	}//isIn method wrapped
 	
 	private int getMax()  {
 		if(getModel().equals("RGB"))
@@ -73,7 +80,7 @@ public class Color implements ColorAPI {
 	}
 	
 	@Override
-	public boolean isEqual(Color color) throws NullPointerException{
+	public boolean isEqual(Color color){
 		if(getModel()!=color.getModel())
 			return false;
 		if(colorcodes[0]!=color.getColor1()||colorcodes[1]!=color.getColor2()||colorcodes[2]!=color.getColor3())

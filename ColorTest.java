@@ -117,7 +117,7 @@ public void name() {
 		System.out.println(error.getClass()); 
 		
 		
-		error = Assertions.assertThrows(IllegalArgumentException.class,()->{ Color RGBColor = new Color(2,5,3,"");});
+		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(2,5,3,"");});
 		System.out.println(error.getClass()); 
 		
 		
@@ -221,15 +221,44 @@ public void name() {
 		System.out.println(error.getClass());
 		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(360,360,361,"CMY");});
 		System.out.println(error.getClass());
+		//error = Assertions.assertThrows(java.lang.Error.class,()->{ Color RGBColor = new Color(0,0,0,);});
+		//System.out.println(error.getClass());
+	//fail
 		
+		error = Assertions.assertThrows(Throwable.class,()->
+		{ Color color = new Color(60,60,2,"CMY");
+		color.add(new Color(9000, 9000,-204, "CMY"));
+		});
+		System.out.println(error.getClass());
+		//error = Assertions.assertThrows(java.lang.Error.class,()->{ Color RGBColor = new Color(0,0,0,);});
+		//System.out.println(error.getClass());
 		//fail
 		//error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color("a",200,100);});
 		//System.out.println(error.getClass());
 		
+		error = Assertions.assertThrows(Throwable.class,()->
+		{ Color color = new Color(60,60,2,"CMY");
+		color.add(new Color(9000, 9000,-204, "CMY"));
+		});
+		System.out.println(error.getClass());
 		
+		error = Assertions.assertThrows(Throwable.class,()->
+		{ Color RGBColor = new Color(60,60,2);
+		RGBColor.isEqual(new Color(9000, 9000,-204, "CMY"));
+		});
+		System.out.println(error.getClass());
 		
+		error = Assertions.assertThrows(Throwable.class,()->
+		{  Color RGBColor = new Color(60,60,2);
+		RGBColor.isEqual(new Color(90, 90,204, ""));		
+		});
+		System.out.println(error.getClass());
 		
-		
+		error = Assertions.assertThrows(Throwable.class,()->
+		{  Color RGBColor = new Color(60,60,2);
+		RGBColor.isEqual(new Color(90, 90,204, " 	"));		
+		});
+		System.out.println(error.getClass());
 		
 		
 		
