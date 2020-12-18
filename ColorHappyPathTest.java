@@ -180,7 +180,39 @@ public class ColorHappyPathTest {
 	}
 	
 	
+	public boolean doSameColorsEqual() {
+		Color color = new Color(11,12,13, "RYB");
+		Color color2 = new Color(11,12,13, "RYB");
+		assertTrue(color.isEqual(color2));
+		color = new Color(110,120,130);
+		color2 = new Color(110,120,130, "RGB");
+		assertTrue(color.isEqual(color2));
+		color = new Color(0,120,360, "CMY");
+		color2 = new Color(0,120,360, "CMY");
+		assertTrue(color.isEqual(color2));
+		
+		return false;
+	}
 	
+	public boolean doDifferentColorsNotEqual() {
+		Color color = new Color(12,12,13, "RYB");
+		Color color2 = new Color(11,12,13, "RYB");
+		assertFalse(color.isEqual(color2));
+		color = new Color(11,120,130);
+		color2 = new Color(110,12,130, "RGB");
+		assertFalse(color.isEqual(color2));
+		color = new Color(10,120,360, "CMY");
+		color2 = new Color(0,120,360, "CMY");
+		assertFalse(color.isEqual(color2));
+		color = new Color(11,12,13);
+		color2 = new Color(11,12,13, "RYB");
+		assertFalse(color.isEqual(color2));
+		color = new Color(0,0,0, "RGB");
+		color2 = new Color(0,0,0, "CMY");
+		assertFalse(color.isEqual(color2));
+		
+		return false;
+	}
 	
 	
 	
@@ -199,6 +231,9 @@ c.addTwoSafeTest();
 c.addThreeSafeTest(); //failing
 c.addThreeBorderSafeTests(); //failing
 c.isCorrectModelSet();
+c.doSameColorsEqual();
+c.doDifferentColorsNotEqual();
+
 	}
 
 }
