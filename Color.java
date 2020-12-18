@@ -10,15 +10,7 @@ public class Color implements ColorAPI {
 //	static final int []MAX_LENGTH = new int[] {255,100,360};
 
 	public Color(int first, int second, int third) throws IllegalArgumentException, IndexOutOfBoundsException {
-		MODELS.add("RGB"); MODELS.add("RYB"); MODELS.add("CMY");
-		model = "RGB";
-		
-		colorcodes[0]= first;
-		colorcodes[1]= second;
-		colorcodes[2]= third;
-		for(int i=0;i<3;i++)
-			if(colorcodes[i]>this.getMax()||colorcodes[i]<0) throw new IndexOutOfBoundsException();
-
+		this(first,second,third,"RGB");
 	}
 	
 	
@@ -38,12 +30,12 @@ public class Color implements ColorAPI {
 	
 	
 	
-	public int getColor1() throws NullPointerException { return colorcodes[0];}; 
-	public int getColor2() throws NullPointerException { return colorcodes[1];};
-	public int getColor3() throws NullPointerException { return colorcodes[2];};
-	public String getModel() throws NullPointerException {return model;};
+	public int getColor1() { return colorcodes[0];}; 
+	public int getColor2() { return colorcodes[1];};
+	public int getColor3() { return colorcodes[2];};
+	public String getModel() {return model;};
 
-	public void add(Color color) throws IllegalArgumentException, NullPointerException, IndexOutOfBoundsException {
+	public void add(Color color) throws IllegalArgumentException, IndexOutOfBoundsException {
 		if(this.isSameModel(color))
 	{
 		colorcodes[0]+=color.getColor1();
@@ -61,9 +53,7 @@ public class Color implements ColorAPI {
 	{		for(Color color:colors)  this.add(color);	};
 	
 	private boolean isSameModel(Color color) throws NullPointerException
-	{
-		
-		return this.getModel().equals(color.getModel());}
+	{		return this.getModel().equals(color.getModel());}
 	
 	private boolean isModelValid(String userInputConstr) throws IllegalArgumentException 
 		{		return MODELS.contains(userInputConstr);	}//isIn method wrapped
