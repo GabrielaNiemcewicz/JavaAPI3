@@ -40,8 +40,7 @@ public class ColorTest {
 	}
 
 	public boolean constructorIllegalArg() {
-		Color hardcodedColor = new Color(1,2,3);
-		assertThrows(Exception.class,()->hardcodedColor.add(hardcodedColor));
+
 		return false;
 	}
 
@@ -100,14 +99,7 @@ public void name() {
 		assertEquals(2,2);
 		Color col = new Color (2,2,1);
 		ColorTest c = new ColorTest();
-		c.constructorIllegalArg(); //throwable
-		IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class,()->{col.add(col);});
-		System.out.println(exception.getMessage());
-		System.out.println(exception.getCause());
-		System.out.println(exception.getLocalizedMessage());
-		System.out.println(exception.getClass()); //not null
-		System.out.println(exception.hashCode()); //not null
-		
+
 		Throwable error = Assertions.assertThrows(IllegalArgumentException.class,()->{ Color RGBColor = new Color(2,5,3,"supermodel");});
 		System.out.println(error.getClass()); //not null
 		System.out.println(error.hashCode()); //not null
@@ -196,11 +188,6 @@ public void name() {
 		//error = Assertions.assertThrows(IllegalArgumentException.class,()->{ Color RGBColor = new Color(5,3,"cmy");});
 		//System.out.println(error.getClass());
 		
-	
-		//error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(-2,-5,-3,"RGB");});
-		//System.out.println(error.getClass());
-		
-
 
 		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(256,500,1000);});
 		System.out.println(error.getClass());
@@ -221,33 +208,53 @@ public void name() {
 		System.out.println(error.getClass());
 		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(360,360,361,"CMY");});
 		System.out.println(error.getClass());
-		//error = Assertions.assertThrows(java.lang.Error.class,()->{ Color RGBColor = new Color(0,0,0,);});
-		//System.out.println(error.getClass());
-	//fail
-		
+		error = Assertions.assertThrows(Throwable.class,()->
+		{ Color color = new Color(60,60,2,"CMY");
+		color.add(new Color(359, 100,5, "CMY"));
+		});
+		System.out.println(error.getClass());
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ Color color = new Color(60,60,2,"CMY");
 		color.add(new Color(9000, 9000,-204, "CMY"));
 		});
 		System.out.println(error.getClass());
-		//error = Assertions.assertThrows(java.lang.Error.class,()->{ Color RGBColor = new Color(0,0,0,);});
-		//System.out.println(error.getClass());
-		//fail
-		//error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color("a",200,100);});
-		//System.out.println(error.getClass());
-		
+		//addall
 		error = Assertions.assertThrows(Throwable.class,()->
-		{ Color color = new Color(60,60,2,"CMY");
-		color.add(new Color(9000, 9000,-204, "CMY"));
+		{ 		Color color = new Color(22,25,2,"RGB");
+		Color[]colors = new Color[] {color, color, color, color, new Color(255, 180,190)};
+		color.addAll(colors);
 		});
 		System.out.println(error.getClass());
+//boundary
+		error = Assertions.assertThrows(Throwable.class,()->
+		{ 		Color color = new Color(19,19,19,"RYB");
+		Color[]colors = new Color[] {color, color, color, color, new Color(6,5,5, "RYB")};
+		color.addAll(colors);
+		});
+		System.out.println(error.getClass());
+
+		error = Assertions.assertThrows(Throwable.class,()->
+		{ 		Color color = new Color(300,300,300,"CMY");
+		Color[]colors = new Color[] {color};
+		color.addAll(colors);
+		});
+		System.out.println(error.getClass());
+
+		error = Assertions.assertThrows(Throwable.class,()->
+		{ 		Color color = new Color(19,19,19);
+		Color[]colors = new Color[] {new Color(6, 5,5, "RYB"), new Color(6, 5,5, "CMY")};
+		color.addAll(colors);
+		});
+		System.out.println(error.getClass());
+		
 		
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ Color RGBColor = new Color(60,60,2);
-		RGBColor.isEqual(new Color(9000, 9000,-204, "CMY"));
+		RGBColor.isEqual(new Color(9000, 90,-204, "CMY"));
 		});
 		System.out.println(error.getClass());
 		
+	
 		error = Assertions.assertThrows(Throwable.class,()->
 		{  Color RGBColor = new Color(60,60,2);
 		RGBColor.isEqual(new Color(90, 90,204, ""));		
@@ -260,8 +267,13 @@ public void name() {
 		});
 		System.out.println(error.getClass());
 		
+		//adding 
 		
-		
+		error = Assertions.assertThrows(Throwable.class,()->
+		{  Color RGBColor = new Color(60,60,2);
+		RGBColor.isEqual(new Color(90, 90,204, " 	"));		
+		});
+		System.out.println(error.getClass());
 	}
 
 }

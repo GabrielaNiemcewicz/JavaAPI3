@@ -119,9 +119,7 @@ public class ColorHappyPathTest {
 		Color color = new Color (13,14,0, "CMY");
 		Color hardcodedColor = new Color(13,21,1,"CMY"); //rands
 		color.add(hardcodedColor);
-		int t1 = color.getColor1();
-		int t2= color.getColor2();
-		int t3= color.getColor3(); new Color(13+13,14+21,0+1, color.getModel());
+		new Color(13+13,14+21,0+1, color.getModel());
 		assertEquals(color.getColor1(),13+13);
 		assertEquals(color.getColor2(),14+21);
 		assertEquals(color.getColor3(),0+1);
@@ -138,7 +136,7 @@ public class ColorHappyPathTest {
 		int t2 = (int)rand;
 		int t3 = (int)rand/4;
 		Color [] colors = new Color[] {new Color(t1,t2,t3),
-										new Color(3,2,1)};
+										new Color(3,2,1), new Color(0,0,0)};
 		color.addAll(colors);
 		assertEquals(colors[0].getColor1()+0+colors[1].getColor1(),color.getColor1());	
 		assertEquals(colors[0].getColor2()+0+colors[1].getColor2(),color.getColor2());		
