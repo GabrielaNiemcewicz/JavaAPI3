@@ -117,9 +117,7 @@ public class ColorHappyPathTest {
 	public boolean addTwoSafeTest() {
 		//new Color(int((modelMAX-color.get)/2))
 		Color color = new Color (13,14,0, "CMY");
-		System.out.println("color init");
 		Color hardcodedColor = new Color(13,21,1,"CMY"); //rands
-		System.out.println("hardcolor init");
 		color.add(hardcodedColor);
 		int t1 = color.getColor1();
 		int t2= color.getColor2();
@@ -127,31 +125,35 @@ public class ColorHappyPathTest {
 		assertEquals(color.getColor1(),13+13);
 		assertEquals(color.getColor2(),14+21);
 		assertEquals(color.getColor3(),0+1);
-		System.out.println(t1+" "+t2+" "+t3+" "+ false);	
 		return false;
 	}
 	
 	public boolean addThreeSafeTest() {
-		Color color = new Color(0,0,1);
-		Random random = new Random();
+		var color = new Color(0,0,1);
+		var random = new Random();
+
 		int rand = random.ints(1,100).findFirst().getAsInt();
-		Color [] colors = new Color[] {new Color((int)rand/10,(int)rand,(int)rand/4),
+		
+		int t1 = (int)rand/10;
+		int t2 = (int)rand;
+		int t3 = (int)rand/4;
+		Color [] colors = new Color[] {new Color(t1,t2,t3),
 										new Color(3,2,1)};
 		color.addAll(colors);
-		assertEquals((int)(rand/10)+3+color.getColor1(),color.getColor1());	
-		assertEquals((int)rand+2+color.getColor1(),color.getColor1());		
-		assertEquals((int)(rand/4)+1+color.getColor1(),color.getColor1());	
+		assertEquals(colors[0].getColor1()+0+colors[1].getColor1(),color.getColor1());	
+		assertEquals(colors[0].getColor2()+0+colors[1].getColor2(),color.getColor2());		
+		assertEquals(colors[0].getColor3()+1+colors[1].getColor3(),color.getColor3());	
 		return false;
 	}
 	
 	//can have cases for other models, not necessary. not random until implmentation decided
 	public boolean addThreeBorderSafeTests() {
-		Color color = new Color(96,96,96,"RYB");
-		var colors = new Color[] {new Color(1,2,3), new Color(3,2,1)};
+		var color = new Color(96,96,96,"RYB");
+		var colors = new Color[] {new Color(1,2,3, "RYB"), new Color(3,2,1, "RYB")};
 		color.addAll(colors);
-		assertEquals(1+3+color.getColor1(),color.getColor1());	
-		assertEquals(2+2+color.getColor2(),color.getColor2());		
-		assertEquals(3+1+color.getColor3(),color.getColor3());		
+		assertEquals(colors[0].getColor1()+96+colors[1].getColor1(),color.getColor1());	
+		assertEquals(colors[0].getColor2()+96+colors[1].getColor2(),color.getColor2());		
+		assertEquals(colors[0].getColor3()+96+colors[1].getColor3(),color.getColor3());
 		return false;
 	}
 	
@@ -193,9 +195,9 @@ c.isInputPositive();
 c.isInputCorrectNumber();
 c.isIsEqualWhenTrue();
 c.isIsEqualWhenFalse();
-c.addTwoSafeTest(); //failing
-//c.addThreeSafeTest(); //failing
-//c.addThreeBorderSafeTests(); //failing
+c.addTwoSafeTest();
+c.addThreeSafeTest(); //failing
+c.addThreeBorderSafeTests(); //failing
 c.isCorrectModelSet();
 	}
 
