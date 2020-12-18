@@ -1,3 +1,4 @@
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -120,14 +121,13 @@ public class ColorHappyPathTest {
 		Color hardcodedColor = new Color(13,21,1,"CMY"); //rands
 		System.out.println("hardcolor init");
 		color.add(hardcodedColor);
-		int t1 = hardcodedColor.getColor1()+color.getColor1();
-		int t2= hardcodedColor.getColor2()+color.getColor2();
-		int t3= hardcodedColor.getColor3()+color.getColor3();
-		System.out.println("three ints");
-		Color solutionColor = new Color (t1,t2,t3, "CMY");
-		System.out.println("solution color");
-		color.isEqual(solutionColor);
-		assertTrue(color.isEqual(solutionColor));		
+		int t1 = color.getColor1();
+		int t2= color.getColor2();
+		int t3= color.getColor3(); new Color(13+13,14+21,0+1, color.getModel());
+		assertEquals(color.getColor1(),13+13);
+		assertEquals(color.getColor2(),14+21);
+		assertEquals(color.getColor3(),0+1);
+		System.out.println(t1+" "+t2+" "+t3+" "+ false);	
 		return false;
 	}
 	
@@ -193,7 +193,7 @@ c.isInputPositive();
 c.isInputCorrectNumber();
 c.isIsEqualWhenTrue();
 c.isIsEqualWhenFalse();
-//c.addTwoSafeTest(); //failing
+c.addTwoSafeTest(); //failing
 //c.addThreeSafeTest(); //failing
 //c.addThreeBorderSafeTests(); //failing
 c.isCorrectModelSet();

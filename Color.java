@@ -36,26 +36,25 @@ public class Color implements ColorAPI {
 	public String getModel() {return model;};
 
 	public void add(Color color) throws IllegalArgumentException, IndexOutOfBoundsException {
-		if(this.isSameModel(color))
+		if(!this.isSameModel(color))
+			throw new IllegalArgumentException();
+		else
 	{
-		colorcodes[0]+=color.getColor1();
-		colorcodes[1]+=color.getColor2();
-		System.out.println("add");
-		colorcodes[2]+= color.getColor3();
-		System.out.println("addd");
+		this.colorcodes[0]+=color.getColor1();
+		this.colorcodes[1]+=color.getColor2();
+		this.colorcodes[2]+= color.getColor3();
 		for(int c:colorcodes)
-		{if (c>getMax()||c<0)///////////////////////
+		if (c>getMax()||c<0)
 		throw new IndexOutOfBoundsException(); 
-	 else throw new IllegalArgumentException(); 
-		}}};
+		}};
 	
-	public void addAll(Color[] colors)  throws IllegalArgumentException
+	public void addAll(Color[] colors) 
 	{		for(Color color:colors)  this.add(color);	};
 	
-	private boolean isSameModel(Color color) throws NullPointerException
+	private boolean isSameModel(Color color)
 	{		return this.getModel().equals(color.getModel());}
 	
-	private boolean isModelValid(String userInputConstr) throws IllegalArgumentException 
+	private boolean isModelValid(String userInputConstr)
 		{		return MODELS.contains(userInputConstr);	}//isIn method wrapped
 	
 	private int getMax()  {
