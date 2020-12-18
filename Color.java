@@ -5,25 +5,22 @@ import java.util.HashSet;
 public class Color implements ColorAPI {
 	int [] colorcodes = new int[3];
 	String model;
-	//public static final Enum models = null; //enum or hashmap?
 	static ArrayList<String> MODELS = new ArrayList <String> ();
-	static HashMap<String,Integer> models = new HashMap<String,Integer>();
+//	static final int []MAX_LENGTH = new int[] {255,100,360};
 
-	static final int []MAX_LENGTH = new int[] {255,100,360};
-
-	public Color(int first, int second, int third) throws IllegalArgumentException {
+	public Color(int first, int second, int third) throws IllegalArgumentException, IndexOutOfBoundsException {
 		MODELS.add("RGB"); MODELS.add("RYB"); MODELS.add("CMY");
 		model = "RGB";
 		colorcodes[0]= first;
 		colorcodes[1]= second;
 		colorcodes[2]= third;
 		for(int i=0;i<3;i++)
-			if(colorcodes[i]>=this.getMax()||colorcodes[i]<=0) throw new IllegalArgumentException();
+			if(colorcodes[i]>this.getMax()||colorcodes[i]<0) throw new IndexOutOfBoundsException();
 
 	}
 	
 	
-	public Color(int first, int second, int third, String model) throws IllegalArgumentException {
+	public Color(int first, int second, int third, String model) throws IllegalArgumentException,IndexOutOfBoundsException  {
 		MODELS.add("RGB"); MODELS.add("RYB"); MODELS.add("CMY");
 		if(isModelValid(model))		this.model = model; 
 		else throw 			new IllegalArgumentException();
@@ -31,7 +28,7 @@ public class Color implements ColorAPI {
 		colorcodes[1]= second;
 		colorcodes[2]= third;
 		for(int i=0;i<3;i++)
-			if(colorcodes[i]>this.getMax()||colorcodes[i]<0) throw new IllegalArgumentException();
+			if(colorcodes[i]>this.getMax()||colorcodes[i]<0) throw new IndexOutOfBoundsException();
 
 	}
 	
@@ -42,7 +39,7 @@ public class Color implements ColorAPI {
 	public int getColor3() throws NullPointerException { return colorcodes[2];};
 	public String getModel() throws NullPointerException {return model;};
 
-	public void add(Color color) throws IllegalArgumentException {
+	public void add(Color color) throws IllegalArgumentException, NullPointerException, IndexOutOfBoundsException {
 		if(this.isSameModel(color))
 	{
 		colorcodes[0]+=color.getColor1();
@@ -51,8 +48,8 @@ public class Color implements ColorAPI {
 		colorcodes[2]+= color.getColor3();
 		System.out.println("addd");
 		for(int c:colorcodes)
-		{if (c>255||c<0)///////////////////////
-		throw new IllegalArgumentException(); 
+		{if (c>getMax()||c<0)///////////////////////
+		throw new IndexOutOfBoundsException(); 
 	 else throw new IllegalArgumentException(); 
 		}}};
 	
@@ -61,7 +58,8 @@ public class Color implements ColorAPI {
 	
 	private boolean isSameModel(Color color) throws NullPointerException{return this.getModel().equals(color.getModel());}
 	
-	private boolean isModelValid(String userInputConstr) throws IllegalArgumentException, NullPointerException {return MODELS.contains(userInputConstr);}//isIn method wrapped
+	private boolean isModelValid(String userInputConstr) throws IllegalArgumentException, NullPointerException 
+		{return MODELS.contains(userInputConstr);}//isIn method wrapped
 	
 	private int getMax()  {
 		if(getModel().equals("RGB"))
