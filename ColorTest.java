@@ -1,9 +1,4 @@
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -11,8 +6,6 @@ import org.junit.jupiter.api.Assertions;
 //split sad and happy path tests
 public class ColorTest {
 
-	Color color1;
-	Color color2;
 	Throwable error;
 	
 
@@ -20,138 +13,105 @@ public class ColorTest {
 	//tests to assert type
 	
 
-	public void isModelValid(Color color) { 
+	public void isModelValid() { 
 		//includes default model choice
 		
-		error = Assertions.assertThrows(IllegalArgumentException.class,()->{ Color RGBColor = new Color(2,5,3,"supermodel");});
+		error = Assertions.assertThrows(IllegalArgumentException.class,()->{ var RGBColor = new Color(2,5,3,"supermodel");});
 		System.out.println(error.getClass()); //not null
 		System.out.println(error.hashCode()); //not null
 
 
-		error = Assertions.assertThrows(IllegalArgumentException.class,()->{ Color RGBColor = new Color(2,5,3,"RGB ");});
+		error = Assertions.assertThrows(IllegalArgumentException.class,()->{ var RGBColor = new Color(2,5,3,"RGB ");});
 		System.out.println(error.getClass()); 
 		
-		error = Assertions.assertThrows(IllegalArgumentException.class,()->{ Color RGBColor = new Color(2,5,3,"cmy");});
+		error = Assertions.assertThrows(IllegalArgumentException.class,()->{ var RGBColor = new Color(2,5,3,"cmy");});
 		System.out.println(error.getClass());
 		
-		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(2,5,3,"RGB ");});
+		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(2,5,3,"RGB ");});
+		System.out.println(error.getClass());
+		error = Assertions.assertThrows(Throwable.class,()->{var RGBColor = new Color(255,20,147, "supermodel");});
 		System.out.println(error.getClass());
 		
 	
 	}
 
 	
-	public boolean isInputNegative(Color color) {
+	public void isInputNegative() {
 	
-		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(256,500,1000);});
+		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(256,500,1000);});
 		System.out.println(error.getClass());
-		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(-1,200,100);});
+		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(-1,200,100, "CMY");});
 		System.out.println(error.getClass());
-		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(-1,260,0);});
+		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(-1,260,0);});
 		System.out.println(error.getClass());
-		///////////////
-		
-		
-		
-		
-		return false;
-	}
 
-	public boolean constructorIllegalArg() {
-
-		error = Assertions.assertThrows(Throwable.class,()->
-		{ Color RGBColor = new Color(60,60,2);
-		RGBColor.isEqual(new Color(9000, 90,-204, "CMY"));
-		});
-		System.out.println(error.getClass());
 		
 	}
 
-	
 
-//is it needed?
-	public boolean isIntInputWrongMixed(Color color) {
-		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(21,15,-3,"RYB");});
+	
+	public void isIntInputWrongMixed() {
+		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(21,15,-3,"RYB");});
 		System.out.println(error.getClass());
 		
-		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(0,-3,0,"CMY");});
+		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(0,-3,0,"CMY");});
 		System.out.println(error.getClass());
 
-		return false;
 	}
 	
-	public boolean isInputNull(Color color) {
-		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(2,5,3,"");});
+	public void isInputNull() {
+		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(2,5,3,"");});
 		System.out.println(error.getClass()); 
 		
 		error = Assertions.assertThrows(Throwable.class,()->
-		{  Color RGBColor = new Color(60,60,2);
+		{  var RGBColor = new Color(60,60,2);
 		RGBColor.isEqual(new Color(90, 90,204, " "));		
 		});
 		System.out.println(error.getClass());
 		
 		error = Assertions.assertThrows(Throwable.class,()->
-		{  Color RGBColor = new Color(60,60,2);
+		{  var RGBColor = new Color(60,60,2);
 		RGBColor.isEqual(new Color(90, 90,204, " 	"));		
 		});
 		System.out.println(error.getClass());
-		////////////////
-		return false;
+
 	}
 	
 	//try catch
-	public boolean isIntTooLarge(Color color) {
-		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(360,360,361,"CMY");});
+	public void isIntTooLarge() {
+		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(360,360,361,"CMY");});
 		System.out.println(error.getClass());
-		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(21,15,222,"RYB");});
+		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(21,15,222,"RYB");});
 		System.out.println(error.getClass());
-		error = Assertions.assertThrows(Throwable.class,()->{ Color RGBColor = new Color(102,101,2,"RYB");});
+		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(102,101,2,"RYB");});
 		System.out.println(error.getClass());
-////////////////////////////////
-		return false;
+
+	
 	}
+	
+	
 
 	//strictly unsafe
-	public boolean addTwoUnsafeTest(Color color) {
+	public void addTwoUnsafeTestRGB() {
 
 		error = Assertions.assertThrows(Throwable.class,()->
-		{ Color color1rgb = new Color(245,230,100);
+		{ var color1rgb = new Color(245,230,100);
 		color1rgb.add(color1rgb);});
 		System.out.println(error.getClass());
 		
 		error = Assertions.assertThrows(Throwable.class,()->
-		{ Color color1rgb = new Color(245,230,100);
+		{ var color1rgb = new Color(245,230,100);
 		color1rgb.add(new Color(10,26,155));}); //edge case
 		System.out.println(error.getClass()+" here");
-		
-		//fail
-		error = Assertions.assertThrows(Throwable.class,()->
-		{ Color color1cmy = new Color(359,356,135, "CMY");
-		color1cmy.add(new Color(1,22,22, "CMY"));}); //edge case
-		System.out.println(error.getClass()+" here");
-		
-		//addall
-				error = Assertions.assertThrows(Throwable.class,()->
-				{ 		Color color = new Color(22,25,2,"RGB");
-				Color[]colors = new Color[] {color, color, color, color, new Color(255, 180,190)};
-				color.addAll(colors);
-				});
-				System.out.println(error.getClass());
-		
+	
+			
+	} 
+	
+	public void addTwoUnsafeTestCMY() {
 		
 		error = Assertions.assertThrows(Throwable.class,()->
-		{ Color color1cmy = new Color(359,356,135, "CMY");
+		{ var color1cmy = new Color(359,356,135, "CMY");
 		color1cmy.add(new Color(359,22,22, "CMY"));}); //edge case
-		System.out.println(error.getClass()+" here");
-		
-		error = Assertions.assertThrows(Throwable.class,()->
-		{ Color color1ryb = new Color(85,99,12, "RYB");
-		color1ryb.add(new Color(10,26,5, "RYB"));}); 
-		System.out.println(error.getClass()+" here");
-		
-		error = Assertions.assertThrows(Throwable.class,()->
-		{ var color1ryb = new Color(85,99,12, "RYB");
-		color1ryb.add(new Color(10,26,5, "RYB"));}); 
 		System.out.println(error.getClass()+" here");
 		
 		error = Assertions.assertThrows(Throwable.class,()->
@@ -159,27 +119,48 @@ public class ColorTest {
 		color1cmy.add(new Color(1,5,22, "CMY"));}); //edge case
 		System.out.println(error.getClass()+" here");
 		
+		error = Assertions.assertThrows(Throwable.class,()->
+		{ var color1cmy = new Color(359,356,135, "CMY");
+		color1cmy.add(new Color(1,22,22, "CMY"));}); //edge case
+		System.out.println(error.getClass()+" here");
+		
+		
+		error = Assertions.assertThrows(Throwable.class,()->
+		{ var colorCMY = new Color(60,60,2,"CMY");
+		colorCMY.add(new Color(359, 100,5, "CMY"));
+		});
+		System.out.println(error.getClass());
+		error = Assertions.assertThrows(Throwable.class,()->
+		{ var colorCMY = new Color(60,60,2,"CMY");
+		colorCMY.add(new Color(9000, 9000,-204, "CMY"));
+		});
+		System.out.println(error.getClass());
+		
+	}
+	public void addTwoUnsafeTestRYB() {
+
+		error = Assertions.assertThrows(Throwable.class,()->
+		{ var color1ryb = new Color(85,99,12, "RYB");
+		color1ryb.add(new Color(10,26,5, "RYB"));}); 
+		System.out.println(error.getClass()+" here");
+		
+		error = Assertions.assertThrows(Throwable.class,()->
+		{ var color1ryb = new Color(85,99,12, "RYB");
+		color1ryb.add(new Color(10,26,5, "RYB"));}); 
+		System.out.println(error.getClass()+" here");
 		
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ var color1ryb = new Color(85,99,12, "RYB");
 		color1ryb.add(new Color(15,2,88, "RYB"));}); 
 		System.out.println(error.getClass()+" here");
 		
-		error = Assertions.assertThrows(Throwable.class,()->
-		{ Color color = new Color(60,60,2,"CMY");
-		color.add(new Color(359, 100,5, "CMY"));
-		});
-		System.out.println(error.getClass());
-		error = Assertions.assertThrows(Throwable.class,()->
-		{ Color color = new Color(60,60,2,"CMY");
-		color.add(new Color(9000, 9000,-204, "CMY"));
-		});
-		System.out.println(error.getClass());
 		
 		
-		return false;
-	} //unsafe from 2 and then 3
-	public boolean addThreeUnsafeTests(Color color) {
+	}
+	
+	
+	//unsafe from 2 and then 3
+	public void addThreeUnsafeTests() {
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ var color1cmy = new Color (9,6,135, "CMY");
 		Color [] colors = new Color[] {new Color(300,300,135, "CMY"),new Color(359,356,135, "CMY")};
@@ -197,14 +178,20 @@ public class ColorTest {
 		Color [] colors = new Color[] {new Color(300,300,135, "CMY"),new Color(359,356,135, "CMY")};
 		color1cmy.addAll(colors);}); //edge case
 		System.out.println(error.getClass()+" here");
-		return false;
+		
+		error = Assertions.assertThrows(Throwable.class,()->
+		{ 	var color = new Color(22,25,2,"RGB");
+		Color[]colors = new Color[] {color, color, color, color, new Color(255, 180,190)};
+		color.addAll(colors);
+		});
+		System.out.println(error.getClass());
 		
 		
 	}
 	
 	
 
-	public boolean addingBoundaryCases () {
+	public void addingBoundaryCases () {
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ 		Color color = new Color(19,19,19,"RYB");
 		Color[]colors = new Color[] {color, color, color, color, new Color(6,5,5, "RYB")};
@@ -229,33 +216,26 @@ public class ColorTest {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		assertEquals(2,2);
-		Color col = new Color (2,2,1);
-		ColorTest c = new ColorTest();
-
-
+		var c = new ColorTest();
+		c.addingBoundaryCases();
+		c.addThreeUnsafeTests();
+		c.addTwoUnsafeTestCMY();
+		c.addTwoUnsafeTestRGB();
+		c.addTwoUnsafeTestRYB();
+		c.isInputNegative();
+		c.isInputNull();
+		c.isIntInputWrongMixed();
+		c.isIntTooLarge();
+		c.isModelValid();
 		
 		
 		
-		
-		//fail
-		//error = Assertions.assertThrows(IllegalArgumentException.class,()->{ Color RGBColor = new Color(5,3,"cmy");});
-		//System.out.println(error.getClass());
-		
-
-		
-
-		
-
-		
-//boundary
 		
 		
 	
 
 		
-//		System.out.println(error.getClass());
+
 	}
 
 }

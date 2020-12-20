@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import java.util.Random;
 public class ColorHappyPathTest {
 
-	public boolean getColorTests() {
+	public void getColorTests() {
 		int a=1,b=2,c=3,d=4;
 		Color hardcodedColor = new Color(1,2,3);
 		assertEquals(1,hardcodedColor.getColor1());
@@ -14,14 +14,12 @@ public class ColorHappyPathTest {
 		assertEquals(3,hardcodedColor.getColor3());
 		assertNotEquals(4,hardcodedColor.getColor2());
 		assertNotEquals(1,hardcodedColor.getColor3());
-		//assert not equals
 		
-		return false;
+
 	}
 	
 	
-	//lower case upper case made true? maybe?
-	public boolean getModelTests() {
+	public void getModelTests() {
 		Color RYBColor = new Color(51,91,83,"RYB");
 		Color RGBColor = new Color(2,5,3,"RGB");
 		
@@ -32,33 +30,20 @@ public class ColorHappyPathTest {
 		assertNotEquals("",RGBColor.getModel());
 		assertNotEquals("",RYBColor.getModel());
 		assertNotEquals("lorem ipsum",RYBColor.getModel());
-		return false;
 	}
 	
 	
 	
-	public boolean isModelValidHP() { 
-
-		Color RYBColor = new Color(1,2,3, "RYB");
-		Color RGBColor = new Color(2,5,3,"RGB");
+	public void isModelValidHP() { 
+		var RYBColor = new Color(1,2,3, "RYB");
+		var RGBColor = new Color(2,5,3,"RGB");
 		String modelCorrect = "RGB";
-		//sad path?
-		String modelIncorrect = "supermodel";
-		String emptyModel = "";
-		String spaceModel = "RGB ";
-		
-		 //Color.models(); //check if in model- might require different assertion
-		//////////////////*
-//get model Enums and check if it's in		
-//////////////////////////////		
-		
-		return false;
 	}
 	
-	public boolean isInputPositive() {
+	public void isInputPositive() {
 		 Random random = new Random();
 		 
-		Color hardcodedColor = new Color( random.ints(0,255).findFirst().getAsInt(),random.ints(0,255).findFirst().getAsInt(),random.ints(0,255).findFirst().getAsInt());
+		var hardcodedColor = new Color( random.ints(0,255).findFirst().getAsInt(),random.ints(0,255).findFirst().getAsInt(),random.ints(0,255).findFirst().getAsInt());
 		assertTrue(hardcodedColor.getColor1()>=0);	
 		assertTrue(hardcodedColor.getColor2()>=0);
 		assertTrue(hardcodedColor.getColor3()>=0);
@@ -66,15 +51,14 @@ public class ColorHappyPathTest {
 		assertTrue(hardcodedColor.getColor2()>=0);
 		hardcodedColor = new Color(255,255,255);
 		assertTrue(hardcodedColor.getColor2()>=0);
-		return false;
 	}
 	
 	//might be different for each model?
-	public boolean isInputCorrectNumber() {
+	public void isInputCorrectNumber() {
 	 Random random = new Random();
 	 int rand = random.ints(0,255).findFirst().getAsInt();
 	 
-		Color hardcodedColor = new Color(rand,2,3, "RGB");
+		var hardcodedColor = new Color(rand,2,3, "RGB");
 		assertEquals(rand,hardcodedColor.getColor1());		
 		hardcodedColor = new Color(1,(int)rand/3,3, "RYB");
 		assertEquals((int)rand/3,hardcodedColor.getColor2());	
@@ -85,19 +69,17 @@ public class ColorHappyPathTest {
 		Color borderColorCMY = new Color (360,360,360, "CMY");
 		Color borderColorRYB = new Color (100,100,100, "RYB");
 		
-		
-		return false;
+
 	}
 	
-	public boolean isIsEqualWhenTrue() {
+	public void isIsEqualWhenTrue() {
 		Color color = new Color (4,7,2,"RYB");
 		Color copyColor = new Color(color.getColor1(),color.getColor2(),color.getColor3(),color.getModel());
 		assertTrue(color.isEqual(copyColor));		
-		return false;
 	}
-	public boolean isIsEqualWhenFalse() {
-		Color color = new Color (4,97,2,"RGB");
-		Color copyColor = new Color(color.getColor1()+1,color.getColor2()+1,color.getColor3()+1,color.getModel());
+	public void isIsEqualWhenFalse() {
+		var color = new Color (4,97,2,"RGB");
+		var copyColor = new Color(color.getColor1()+1,color.getColor2()+1,color.getColor3()+1,color.getModel());
 		assertFalse(color.isEqual(copyColor));		
 		copyColor = new Color(color.getColor1()-2,color.getColor2(),color.getColor3(),color.getModel());
 		assertFalse(color.isEqual(copyColor));		
@@ -111,22 +93,21 @@ public class ColorHappyPathTest {
 		assertFalse(color.isEqual(copyColor));	
 		copyColor = new Color(color.getColor1(),color.getColor2(),color.getColor3());
 		assertTrue(color.isEqual(copyColor));		
-		return false;
 	}
 	//can be random, recorded tests
-	public boolean addTwoSafeTest() {
+	public void addTwoSafeTest() {
 		//new Color(int((modelMAX-color.get)/2))
-		Color color = new Color (13,14,0, "CMY");
-		Color hardcodedColor = new Color(13,21,1,"CMY"); //rands
+		var color = new Color (13,14,0, "CMY");
+		var hardcodedColor = new Color(13,21,1,"CMY"); //rands
 		color.add(hardcodedColor);
 		new Color(13+13,14+21,0+1, color.getModel());
 		assertEquals(color.getColor1(),13+13);
 		assertEquals(color.getColor2(),14+21);
 		assertEquals(color.getColor3(),0+1);
-		return false;
+		
 	}
 	
-	public boolean addThreeSafeTest() {
+	public void addThreeSafeTest() {
 		var color = new Color(0,0,1);
 		var random = new Random();
 
@@ -141,30 +122,27 @@ public class ColorHappyPathTest {
 		assertEquals(colors[0].getColor1()+0+colors[1].getColor1(),color.getColor1());	
 		assertEquals(colors[0].getColor2()+0+colors[1].getColor2(),color.getColor2());		
 		assertEquals(colors[0].getColor3()+1+colors[1].getColor3(),color.getColor3());	
-		return false;
 	}
 	
 	//can have cases for other models, not necessary. not random until implmentation decided
-	public boolean addThreeBorderSafeTests() {
+	public void addThreeBorderSafeTests() {
 		var color = new Color(96,96,96,"RYB");
 		var colors = new Color[] {new Color(1,2,3, "RYB"), new Color(3,2,1, "RYB")};
 		color.addAll(colors);
 		assertEquals(colors[0].getColor1()+96+colors[1].getColor1(),color.getColor1());	
 		assertEquals(colors[0].getColor2()+96+colors[1].getColor2(),color.getColor2());		
 		assertEquals(colors[0].getColor3()+96+colors[1].getColor3(),color.getColor3());
-		return false;
 	}
 	
-	public boolean isDefaultModelRGB(Color color) {
-		Color hardcodedColor = new Color(0,0,0);
+	public void isDefaultModelRGB(Color color) {
+		var hardcodedColor = new Color(0,0,0);
 		assertEquals("RGB",hardcodedColor.getModel());		
-		return false;
 	}
 	
-	public boolean isCorrectModelSet() {
-		Color rybColor = new Color(11,12,13, "RYB");
-		Color cmyColor = new Color(255,21,31, "CMY");
-		Color rgbColor = new Color(61,62,63, "RGB");
+	public void isCorrectModelSet() {
+		var rybColor = new Color(11,12,13, "RYB");
+		var cmyColor = new Color(255,21,31, "CMY");
+		var rgbColor = new Color(61,62,63, "RGB");
 		assertEquals("RYB",rybColor.getModel());		
 		assertEquals("CMY",cmyColor.getModel());		
 		assertEquals("RGB",rgbColor.getModel());	
@@ -174,13 +152,13 @@ public class ColorHappyPathTest {
 		assertNotEquals("CMY",rgbColor.getModel());
 		assertNotEquals("RGB",rybColor.getModel());
 		assertNotEquals("RGB",cmyColor.getModel());
-		return false;
+
 	}
 	
 	
-	public boolean doSameColorsEqual() {
-		Color color = new Color(11,12,13, "RYB");
-		Color color2 = new Color(11,12,13, "RYB");
+	public void doSameColorsEqual() {
+		var color = new Color(11,12,13, "RYB");
+		var color2 = new Color(11,12,13, "RYB");
 		assertTrue(color.isEqual(color2));
 		color = new Color(110,120,130);
 		color2 = new Color(110,120,130, "RGB");
@@ -188,13 +166,12 @@ public class ColorHappyPathTest {
 		color = new Color(0,120,360, "CMY");
 		color2 = new Color(0,120,360, "CMY");
 		assertTrue(color.isEqual(color2));
-		
-		return false;
+	
 	}
 	
-	public boolean doDifferentColorsNotEqual() {
-		Color color = new Color(12,12,13, "RYB");
-		Color color2 = new Color(11,12,13, "RYB");
+	public void doDifferentColorsNotEqual() {
+		var color = new Color(12,12,13, "RYB");
+		var color2 = new Color(11,12,13, "RYB");
 		assertFalse(color.isEqual(color2));
 		color = new Color(11,120,130);
 		color2 = new Color(110,12,130, "RGB");
@@ -209,25 +186,23 @@ public class ColorHappyPathTest {
 		color2 = new Color(0,0,0, "CMY");
 		assertFalse(color.isEqual(color2));
 		
-		return false;
 	}
 	
 	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-ColorHappyPathTest c = new ColorHappyPathTest();
+var c = new ColorHappyPathTest();
 c.getColorTests();
 c.getModelTests();
-//to implement//c.isModelValidHP();
-//to implement
+c.isModelValidHP();
 c.isInputPositive();
 c.isInputCorrectNumber();
 c.isIsEqualWhenTrue();
 c.isIsEqualWhenFalse();
 c.addTwoSafeTest();
-c.addThreeSafeTest(); //failing
-c.addThreeBorderSafeTests(); //failing
+c.addThreeSafeTest(); 
+c.addThreeBorderSafeTests();
 c.isCorrectModelSet();
 c.doSameColorsEqual();
 c.doDifferentColorsNotEqual();
