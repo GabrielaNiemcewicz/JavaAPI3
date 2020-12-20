@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Color implements ColorAPI {
 	private int [] colorcodes = new int[3];
@@ -21,6 +19,7 @@ public class Color implements ColorAPI {
 	
 	public Color(int first, int second, int third, String model) throws IndexOutOfBoundsException, NoArgumentException, ModelException  {
 		if(model.isBlank()) throw new NoArgumentException("Error, missing model while specifiction implied");
+	
 		if(isModelValid(model))		this.model = model; 
 		else throw 	new ModelException("Not a supported color model");
 		
@@ -34,13 +33,13 @@ public class Color implements ColorAPI {
 	
 	
 	
-	public int getColor1() { return colorcodes[0];}; 
-	public int getColor2() { return colorcodes[1];};
-	public int getColor3() { return colorcodes[2];};
+	public final int getColor1() { return colorcodes[0];}; 
+	public final int getColor2() { return colorcodes[1];};
+	public final int getColor3() { return colorcodes[2];};
 	public String getModel() {return model;};
 
 	
-	public void add(Color color) throws IllegalArgumentException, IndexOutOfBoundsException, ModelException {
+	public void add(Color color) throws IndexOutOfBoundsException, ModelException {
 		if(!this.isSameModel(color))
 			throw new ModelException("Exception- Incopatible models to add");
 		
@@ -53,16 +52,16 @@ public class Color implements ColorAPI {
 			throw new IndexOutOfBoundsException(); 
 		}};
 	
-	public void addAll(Color[] colors) throws IllegalArgumentException, IndexOutOfBoundsException, ModelException
+	public void addAll(Color[] colors) throws IndexOutOfBoundsException, ModelException
 	{		for(Color color:colors)  this.add(color);	};
 	
-	private boolean isSameModel(Color color)
+	private final boolean isSameModel(Color color)
 	{		return this.getModel().equals(color.getModel());}
 	
-	private boolean isModelValid(String userInputConstr)
-		{		return MODELS.containsKey(userInputConstr);	}//isIn method wrapped
+	private final boolean isModelValid(String userInputConstr)
+		{	return MODELS.containsKey(userInputConstr);	}//isIn method wrapped
 	
-	private int getMax()  {		return MODELS.get(getModel());		}
+	private final int getMax()  {	return MODELS.get(getModel());	}
 	
 	@Override
 	public boolean isEqual(Color color){

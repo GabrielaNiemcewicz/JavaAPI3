@@ -1,6 +1,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 
 //check - equals, not equals, edge cases, [...]
 //split sad and happy path tests
@@ -12,7 +14,7 @@ public class ColorTest {
 	
 	//tests to assert type
 	
-
+	@BeforeAll 
 	public void isModelValid() { 
 		//includes default model choice
 		
@@ -31,11 +33,9 @@ public class ColorTest {
 		System.out.println(error.getClass());
 		error = Assertions.assertThrows(Throwable.class,()->{var RGBColor = new Color(255,20,147, "supermodel");});
 		System.out.println(error.getClass());
-		
-	
 	}
 
-	
+	@BeforeAll
 	public void isInputNegative() {
 	
 		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(256,500,1000);});
@@ -44,12 +44,10 @@ public class ColorTest {
 		System.out.println(error.getClass());
 		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(-1,260,0);});
 		System.out.println(error.getClass());
-
-		
 	}
 
 
-	
+	@Test
 	public void isIntInputWrongMixed() {
 		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(21,15,-3,"RYB");});
 		System.out.println(error.getClass());
@@ -58,7 +56,7 @@ public class ColorTest {
 		System.out.println(error.getClass());
 
 	}
-	
+	@Test
 	public void isInputNull() {
 		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(2,5,3,"");});
 		System.out.println(error.getClass()); 
@@ -77,7 +75,7 @@ public class ColorTest {
 
 	}
 	
-	//try catch
+	@BeforeAll
 	public void isIntTooLarge() {
 		error = Assertions.assertThrows(Throwable.class,()->{ var RGBColor = new Color(360,360,361,"CMY");});
 		System.out.println(error.getClass());
@@ -92,6 +90,7 @@ public class ColorTest {
 	
 
 	//strictly unsafe
+	@Test
 	public void addTwoUnsafeTestRGB() {
 
 		error = Assertions.assertThrows(Throwable.class,()->
@@ -106,7 +105,7 @@ public class ColorTest {
 	
 			
 	} 
-	
+	@Test
 	public void addTwoUnsafeTestCMY() {
 		
 		error = Assertions.assertThrows(Throwable.class,()->
@@ -137,47 +136,48 @@ public class ColorTest {
 		System.out.println(error.getClass());
 		
 	}
+	@Test
 	public void addTwoUnsafeTestRYB() {
 
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ var color1ryb = new Color(85,99,12, "RYB");
 		color1ryb.add(new Color(10,26,5, "RYB"));}); 
-		System.out.println(error.getClass()+" here");
+		System.out.println(error.getClass());
 		
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ var color1ryb = new Color(85,99,12, "RYB");
 		color1ryb.add(new Color(10,26,5, "RYB"));}); 
-		System.out.println(error.getClass()+" here");
+		System.out.println(error.getClass());
 		
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ var color1ryb = new Color(85,99,12, "RYB");
 		color1ryb.add(new Color(15,2,88, "RYB"));}); 
-		System.out.println(error.getClass()+" here");
+		System.out.println(error.getClass());
 		
 		
 		
 	}
 	
 	
-	//unsafe from 2 and then 3
+	@AfterAll
 	public void addThreeUnsafeTests() {
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ var color1cmy = new Color (9,6,135, "CMY");
 		Color [] colors = new Color[] {new Color(300,300,135, "CMY"),new Color(359,356,135, "CMY")};
 		color1cmy.addAll(colors);}); 
-		System.out.println(error.getClass()+" here");
+		System.out.println(error.getClass());
 		
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ var color1cmy = new Color (9,6,135, "CMY");
 		Color [] colors = new Color[] {new Color(301,304,25, "CMY"),new Color(50,51,101, "CMY")};
 		color1cmy.addAll(colors);}); //edge case
-		System.out.println(error.getClass()+" here");
+		System.out.println(error.getClass());
 		
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ var color1cmy = new Color (9,6,135, "CMY");
 		Color [] colors = new Color[] {new Color(300,300,135, "CMY"),new Color(359,356,135, "CMY")};
 		color1cmy.addAll(colors);}); //edge case
-		System.out.println(error.getClass()+" here");
+		System.out.println(error.getClass());
 		
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ 	var color = new Color(22,25,2,"RGB");
@@ -190,7 +190,7 @@ public class ColorTest {
 	}
 	
 	
-
+	@AfterAll
 	public void addingBoundaryCases () {
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ 		Color color = new Color(19,19,19,"RYB");
