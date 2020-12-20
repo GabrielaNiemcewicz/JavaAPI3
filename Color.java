@@ -5,8 +5,14 @@ import java.util.HashSet;
 public class Color implements ColorAPI {
 	private int [] colorcodes = new int[3];
 	private String model;
-	private static ArrayList<String> MODELS = new ArrayList <String> ();
-//	static final int []MAX_LENGTH = new int[] {255,100,360};
+	
+	public static final HashMap<String, Integer> MODELS;
+	static {
+	    MODELS = new HashMap<>();
+	    MODELS.put("RGB", 255);
+	    MODELS.put("RYB", 100);
+	    MODELS.put("CMY", 360);
+	}
 
 	public Color(int first, int second, int third) throws IllegalArgumentException, IndexOutOfBoundsException {
 		this(first,second,third,"RGB");
@@ -14,7 +20,7 @@ public class Color implements ColorAPI {
 	
 	
 	public Color(int first, int second, int third, String model) throws IllegalArgumentException,IndexOutOfBoundsException, NoArgumentException, ModelException  {
-		MODELS.add("RGB"); MODELS.add("RYB"); MODELS.add("CMY");
+	//	MODELS.add("RGB"); MODELS.add("RYB"); MODELS.add("CMY");
 		if(model.isBlank()) throw new NoArgumentException("Error, missing model while specifiction implied");
 		if(isModelValid(model))		this.model = model; 
 		else throw 	new ModelException("Not a supported color model");
@@ -54,7 +60,7 @@ public class Color implements ColorAPI {
 	{		return this.getModel().equals(color.getModel());}
 	
 	private boolean isModelValid(String userInputConstr)
-		{		return MODELS.contains(userInputConstr);	}//isIn method wrapped
+		{		return MODELS.containsKey(userInputConstr);	}//isIn method wrapped
 	
 	private int getMax()  {
 		if(getModel().equals("RGB"))
