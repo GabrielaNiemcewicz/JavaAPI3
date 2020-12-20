@@ -8,6 +8,6 @@ public interface ColorAPI {
 	public boolean isEqual(Color color);
 	public void add(Color color);
 	public void addAll(Color[] colors);
-	public static final HashMap<String, Integer> MODELS;
+
 
 }
