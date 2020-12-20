@@ -52,8 +52,10 @@ public class Color implements ColorAPI {
 			throw new IndexOutOfBoundsException(); 
 		}};
 	
-	public void addAll(Color[] colors) throws IndexOutOfBoundsException, ModelException
-	{		for(Color color:colors)  this.add(color);	};
+	public void addAll(Color[] colors) throws IndexOutOfBoundsException, ModelException{		
+		if(colors.length==0) return;
+		
+		for(Color color:colors)  this.add(color);	};
 	
 	private final boolean isSameModel(Color color)
 	{		return this.getModel().equals(color.getModel());}

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import java.util.Random;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,7 +24,7 @@ public class ColorHappyPathTest {
 
 	}
 	
-	@BeforeAll
+	@Test
 	public void getModelTests() {
 		Color RYBColor = new Color(51,91,83,"RYB");
 		Color RGBColor = new Color(2,5,3,"RGB");
@@ -38,7 +39,7 @@ public class ColorHappyPathTest {
 	}
 	
 	
-	@Test
+	@BeforeAll
 	public void isModelValidHP() { 
 		var RYBColor = new Color(1,2,3, "RYB");
 		var RGBColor = new Color(2,5,3,"RGB");
@@ -81,11 +82,14 @@ public class ColorHappyPathTest {
 
 	}
 	
-	@Test
+	@Ignore("Sufficent scope ensured already")
 	public void isIsEqualWhenTrue() {
-		Color color = new Color (4,7,2,"RYB");
-		Color copyColor = new Color(color.getColor1(),color.getColor2(),color.getColor3(),color.getModel());
+		var color = new Color (4,7,2,"RYB");
+		var copyColor = new Color(color.getColor1(),color.getColor2(),color.getColor3(),color.getModel());
 		assertTrue(color.isEqual(copyColor));		
+		 color = new Color (14,17,121);
+		 copyColor = new Color(color.getColor1(),color.getColor2(),color.getColor3(),color.getModel());
+		assertTrue(color.isEqual(copyColor));	
 	}
 	@Test
 	public void isIsEqualWhenFalse() {
@@ -143,6 +147,13 @@ public class ColorHappyPathTest {
 		assertEquals(colors[0].getColor1()+96+colors[1].getColor1(),color.getColor1());	
 		assertEquals(colors[0].getColor2()+96+colors[1].getColor2(),color.getColor2());		
 		assertEquals(colors[0].getColor3()+96+colors[1].getColor3(),color.getColor3());
+		colors = new Color [0];
+		var temp = color;
+		color.addAll(colors);
+		assertEquals(temp.getColor1(),color.getColor1());	
+		assertEquals(temp.getColor2(),color.getColor2());		
+		assertEquals(temp.getColor3(),color.getColor3());
+	
 	}
 	
 	@Test
