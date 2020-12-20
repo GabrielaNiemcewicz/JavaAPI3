@@ -3,10 +3,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Color implements ColorAPI {
-	int [] colorcodes = new int[3];
-	int nothing;
-	String model;
-	static ArrayList<String> MODELS = new ArrayList <String> ();
+	private int [] colorcodes = new int[3];
+	private String model;
+	private static ArrayList<String> MODELS = new ArrayList <String> ();
 //	static final int []MAX_LENGTH = new int[] {255,100,360};
 
 	public Color(int first, int second, int third) throws IllegalArgumentException, IndexOutOfBoundsException {
@@ -14,11 +13,11 @@ public class Color implements ColorAPI {
 	}
 	
 	
-	public Color(int first, int second, int third, String model) throws IllegalArgumentException,IndexOutOfBoundsException, NullPointerException  {
+	public Color(int first, int second, int third, String model) throws IllegalArgumentException,IndexOutOfBoundsException, NoArgumentException, ModelException  {
 		MODELS.add("RGB"); MODELS.add("RYB"); MODELS.add("CMY");
-		if(model.isBlank()) throw new NullPointerException();
+		if(model.isBlank()) throw new NoArgumentException("Error, missing model while specifiction implied");
 		if(isModelValid(model))		this.model = model; 
-		else throw 			new IllegalArgumentException();
+		else throw 	new ModelException("Not a supported color model");
 		
 		colorcodes[0]= first;
 		colorcodes[1]= second;
@@ -35,9 +34,9 @@ public class Color implements ColorAPI {
 	public int getColor3() { return colorcodes[2];};
 	public String getModel() {return model;};
 
-	public void add(Color color) throws IllegalArgumentException, IndexOutOfBoundsException {
+	public void add(Color color) throws IllegalArgumentException, IndexOutOfBoundsException, ModelException {
 		if(!this.isSameModel(color))
-			throw new IllegalArgumentException();
+			throw new ModelException("Exception- Incopatible models to add");//IllegalArgumentException();
 		else
 	{
 		this.colorcodes[0]+=color.getColor1();
@@ -48,7 +47,7 @@ public class Color implements ColorAPI {
 		throw new IndexOutOfBoundsException(); 
 		}};
 	
-	public void addAll(Color[] colors) throws IllegalArgumentException, IndexOutOfBoundsException
+	public void addAll(Color[] colors) throws IllegalArgumentException, IndexOutOfBoundsException, ModelException
 	{		for(Color color:colors)  this.add(color);	};
 	
 	private boolean isSameModel(Color color)

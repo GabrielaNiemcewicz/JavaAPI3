@@ -6,5 +6,6 @@ public interface ColorAPI {
 	public String getModel();
 	public boolean isEqual(Color color);
 	public void add(Color color);
+	public void addAll(Color[] colors);
 
 }

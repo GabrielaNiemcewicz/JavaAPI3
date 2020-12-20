@@ -121,13 +121,13 @@ public class ColorTest {
 		
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ var color1cmy = new Color(359,356,135, "CMY");
-		color1cmy.add(new Color(1,22,22, "CMY"));}); //edge case
+		color1cmy.add(new Color(1,22,22, "RGB"));}); //edge case
 		System.out.println(error.getClass()+" here");
 		
 		
 		error = Assertions.assertThrows(Throwable.class,()->
 		{ var colorCMY = new Color(60,60,2,"CMY");
-		colorCMY.add(new Color(359, 100,5, "CMY"));
+		colorCMY.add(new Color(359, 100,5, "RYB"));
 		});
 		System.out.println(error.getClass());
 		error = Assertions.assertThrows(Throwable.class,()->
